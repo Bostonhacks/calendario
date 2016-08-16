@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script.
+      function createCalendar() {
+      var scheduleUrl = document.getElementsByName('schedule')[0].value;
+      var name = document.getElementsByName('name')[0].value;
+        if(scheduleUrl && name){
+          if(scheduleUrl.length > 118 && name.length > 0){
+            scheduleUrl = scheduleUrl.substring(64);
+            window.location.href = '/classes/?' + scheduleUrl + '&name=' + name;
+          }
+        }
+        else{
+          alert("Please fill out all fields correctly. Check that you have used the IMAGE Url and filled out calendar name.");
+        }
+      }
+  body
+    block content
+      h1(class="title")= title
+      h2(class="title")= instruction
+      a(href='/instructions') Detailed Instructions
+      input(type='text' name='schedule' class='input_schedule')
+      h2(class="title")= name
+      input(type='text' name='name' class='input_name')
+      button(onclick="createCalendar()" class="start").
+        Go
