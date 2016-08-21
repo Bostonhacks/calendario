@@ -2,27 +2,12 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 
-var google = require('googleapis');
-var googleAuth = require('google-auth-library');
-var OAuth2 = google.auth.OAuth2;
-var auth = new googleAuth();
-var client_secret = require('../client_secret.json');
+//Authentication
+var authenticate = require('./authenticate.js');
+var oauth2Client = authenticate.client;
 
-var CLIENT_ID = client_secret.web.client_id;
-var CLIENT_SECRET = client_secret.web.client_secret;
-var REDIRECT_URL = client_secret.web.redirect_uris[0];
-
-var oauth2Client = new auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
-
-function getAccessToken(oauth2Client) {
-  // generate consent page url
-  var url = oauth2Client.generateAuthUrl({
-    access_type: 'offline', // will return a refresh token
-    scope: 'https://www.googleapis.com/auth/calendar' // can be a space-delimited string or an array of scopes
-  });
-
-  return url;
-}
+//Parse user string input
+var parse = require('./parse.js');
 
 //Change datetime format from 20150902 to "2015-09-03T10:00:00.000-07:00"
 function setDateTimeFormat(time, date) {
@@ -425,26 +410,15 @@ router.get('/end', function(req, res, next){
   res.render('end');
 });
 
-router.get('/google/auth/', function(req, res, next){
-    var tokenURL = getAccessToken(oauth2Client);
-    res.redirect(tokenURL);
+router.get('/google/auth/', function(req, res){
+  authenticate.getAccessToken(res);
 });
 
-router.get('/google/authcomplete/', function(req,res,next){
-  oauth2Client.getToken(req.query.code, function(err, tokens) {
-    // set tokens to the client
-    if(err){
-      console.log("error");
-    }
-    else{
-      oauth2Client.setCredentials(tokens);
-      console.log("success");
-      res.redirect('/new_bu_calendar');
-    }
-  });
+router.get('/google/authcomplete/', function(req, res){
+  authenticate.setToken(req.query.code, res);
 });
 
-router.get('/instructions',function(req,res,next){
+router.get('/instructions',function(req, res){
   res.render('instructions');
 });
 
