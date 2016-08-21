@@ -14,8 +14,6 @@ var REDIRECT_URL = client_secret.web.redirect_uris[0];
 
 var oauth2Client = new auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
 
-// var location = require('./location');
-
 function getAccessToken(oauth2Client) {
   // generate consent page url
   var url = oauth2Client.generateAuthUrl({
@@ -68,6 +66,38 @@ function getWeekDay(string){
       }
 }
 
+function createClass()
+{
+  var startDate = getWeekDay(index.d);
+  var startDateTime = setDateTimeFormat(index.tb, startDate);
+  var endDateTime = setDateTimeFormat(index.te, startDate);
+
+  var event = {
+    "summary": index.c,
+    "start": {
+      "dateTime": startDateTime,
+      "timeZone": "America/New_York"
+    },
+    "end": {
+      "dateTime": endDateTime,
+      "timeZone": "America/New_York"
+    },
+    "recurrence": [
+      "RRULE:FREQ=WEEKLY;UNTIL=20161212T120000Z",//BU-SPECIFIC
+    ]
+  };
+}
+
+// function insertClass(auth, calendarId, class)
+// {
+//
+// }
+//
+// function insertClassResHandler(err, class)
+// {
+//
+// }
+
 function insertEvents(req, calendar, newCalendarID, callback){
     classArray  = [];
     //Iterate through every property in the query
@@ -85,7 +115,6 @@ function insertEvents(req, calendar, newCalendarID, callback){
         //Set the properties of our class array from the query's data
         classArray[index][type] = req.query[property];
       }
-      //console.log(classArray);
     }
 
     classArray.splice(0,1);
@@ -94,11 +123,9 @@ function insertEvents(req, calendar, newCalendarID, callback){
       var startDate = getWeekDay(index.d);
       var startDateTime = setDateTimeFormat(index.tb, startDate);
       var endDateTime = setDateTimeFormat(index.te, startDate);
-      // var classLocation = getLocation(index.c);
 
       var event = {
         "summary": index.c,
-        // "location": "Somewhere",
         "start": {
           "dateTime": startDateTime,
           "timeZone": "America/New_York"
@@ -107,10 +134,8 @@ function insertEvents(req, calendar, newCalendarID, callback){
           "dateTime": endDateTime,
           "timeZone": "America/New_York"
         },
-        // "location" : classLocation,
         "recurrence": [
-          //"RRULE:FREQ=WEEKLY;UNTIL=20161210T120000Z",
-          "RRULE:FREQ=WEEKLY;UNTIL=20160430T120000Z",//BU-SPECIFIC
+          "RRULE:FREQ=WEEKLY;UNTIL=20161212T120000Z",//BU-SPECIFIC
         ]
       };
 
@@ -372,11 +397,9 @@ router.get('/classes/',function(req, res, next){
       res.redirect('/');
     }
     else{
-
       var calendar = google.calendar('v3');
       var newCalendarID;
       var name = req.query.name;
-      var squad_number = req.query.squad_number;
       calendar.calendars.insert({
         auth: oauth2Client,
         "resource" :{
@@ -424,10 +447,5 @@ router.get('/google/authcomplete/', function(req,res,next){
 router.get('/instructions',function(req,res,next){
   res.render('instructions');
 });
-
-// router.get('/test', function(req,res,next){
-//   getLocation('CASMA226 A1');
-//   res.render('instructions');
-// });
 
 module.exports = router;
