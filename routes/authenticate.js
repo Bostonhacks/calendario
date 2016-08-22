@@ -43,6 +43,7 @@ function setToken(tokenCode, res) {
 }
 
 module.exports = {
+  api: google,
   client: oauth2Client,
   getAccessToken: getAccessToken,
   setToken: setToken
