@@ -3,8 +3,10 @@ var router = express.Router();
 
 //Authentication
 var authenticate = require('./authenticate.js');
-//Parse user string input
+
+//Insertion/deletion of classes
 var insert = require('./insert.js');
+var clean = require('./clean.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -22,12 +24,12 @@ router.get('/new_bu_calendar/', function(req, res, next) {
 
 // Entry point into creating calendar
 router.get('/classes/',function(req, res, next){
-  var result = insert.insertCalendar(req, res);
+  insert.insertCalendar(req, res);
 });
 
 //Entry point into clean up days
 router.get('/clean', function(req, res, next){
-  res.render('end');
+  clean.cleanUp(req, res);
 });
 
 router.get('/google/auth/', function(req, res){

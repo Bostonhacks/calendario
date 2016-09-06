@@ -38,7 +38,7 @@ function insertClasses(req, res, calendarCreated)
       }
       else {
         console.log('Completed class insertion!');
-        res.redirect('/clean');
+        res.redirect('/clean?cid=' + calendarCreated.id);
       }
     });
 }
@@ -110,6 +110,5 @@ function insertEventErrorHandler(err, event, retryCount, callback)
 }
 
 module.exports = {
-  insertCalendar: insertCalendar,
-  insertClasses: insertClasses
+  insertCalendar: insertCalendar
 }
