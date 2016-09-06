@@ -5,12 +5,12 @@ var calendarAPI = authenticate.api.calendar('v3');
 var newCalendarId;
 
 //API globals
-var octTenStart = '2016-10-10T00:00:00-05:00';
-var octTenEnd = '2016-10-10T23:00:00-05:00';
-var octElevenStart = '2016-10-11T00:00:00-05:00';
-var octElevenEnd = '2016-10-11T23:00:00-05:00';
-var novTwentyThirdStart = '2016-11-23T00:00:00-05:00';
-var novTwentyFifthEnd = '2016-11-25T23:00:00-05:00';
+var octTenStart = '2016-10-10T00:00:00-04:00';
+var octTenEnd = '2016-10-10T23:00:00-04:00';
+var octElevenStart = '2016-10-11T00:00:00-04:00';
+var octElevenEnd = '2016-10-11T23:00:00-04:00';
+var novTwentyThirdStart = '2016-11-23T00:00:00-04:00';
+var novTwentyFifthEnd = '2016-11-25T23:00:00-04:00';
 
 var fieldsNeeded = 'items(description,id,summary, start, end)';
 var singleEventsBool = true;
