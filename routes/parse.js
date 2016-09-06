@@ -35,11 +35,11 @@ function setDateTimeFormat(time, date) {
 
   date = date.substring(0,4) + "-" + date.substring(4,6) + "-" + date.substring(6);
   time = time.substring(0,2) + ":" + time.substring(2);
-  time = time + ":00.000-05:00";
+  time = time + ":00.000-04:00";
 
   var dateTime = date + 'T' + time;
 
-  // console.log(dateTime);
+  console.log(dateTime);
   return dateTime;
 }
 
