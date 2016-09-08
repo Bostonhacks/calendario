@@ -16,29 +16,6 @@ files:
   - source: views
     destination: /var/www/bu-calendar-import/views
 
-permissions:
-  - object: /var/www/bu-calendar-import
-    pattern: "**"
-    mode: 644
-    type:
-      - file
-  - object: /var/www/bu-calendar-import
-    pattern: "**"
-    mode: 755
-    type:
-      - directory
-  - object: /var/www/bu-calendar-import/scripts/restart_bu_cal
-    mode: 755
-    type:
-      - file
-  - object: /var/www/bu-calendar-import/scripts/reinstall_npm
-    mode: 755
-    type:
-      - file
-  - object: /var/www/bu-calendar-import/scripts/stop_bu_cal
-    mode: 755
-    type:
-      - file
 hooks:
   ApplicationStop:
      - location: scripts/stop_bu_cal
