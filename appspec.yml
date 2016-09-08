@@ -41,8 +41,8 @@ permissions:
       - file
 hooks:
   ApplicationStop:
-     - location: stop_bu_cal
+     - location: /var/www/bu-calendar-import/scripts/stop_bu_cal
   AfterInstall:
-     - location: reinstall_npm
+     - location: /var/www/bu-calendar-import/scripts/reinstall_npm
   ApplicationStart:
-     - location: restart_bu_cal
+     - location: /var/www/bu-calendar-import/scripts/restart_bu_cal
