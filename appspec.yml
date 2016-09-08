@@ -11,6 +11,8 @@ files:
     destination: /var/www/bu-calendar-import/public
   - source: routes
     destination: /var/www/bu-calendar-import/routes
+  - source: scripts
+    destination: /var/www/bu-calendar-import/scripts
   - source: views
     destination: /var/www/bu-calendar-import/views
 
