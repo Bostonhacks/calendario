@@ -1,0 +1,46 @@
+version: 0.0
+os: linux
+files:
+  - source: app.js
+    destination: /var/www/bu-calendar-import
+  - source: package.json
+    destination: /var/www/bu-calendar-import
+  - source: bin
+    destination: /var/www/bu-calendar-import/bin
+  - source: public
+    destination: /var/www/bu-calendar-import/public
+  - source: routes
+    destination: /var/www/bu-calendar-import/routes
+  - source: views
+    destination: /var/www/bu-calendar-import/views
+
+permissions:
+  - object: /var/www/bu-calendar-import
+    pattern: "**"
+    mode: 644
+    type:
+      - file
+  - object: /var/www/bu-calendar-import
+    pattern: "**"
+    mode: 755
+    type:
+      - directory
+  - object: /var/www/bu-calendar-import/scripts/restart_bu_cal
+    mode: 755
+    type:
+      - file
+  - object: /var/www/bu-calendar-import/scripts/reinstall_npm
+    mode: 755
+    type:
+      - file
+  - object: /var/www/bu-calendar-import/scripts/stop_bu_cal
+    mode: 755
+    type:
+      - file
+hooks:
+  ApplicationStop:
+     - location: stop_bu_cal
+  AfterInstall:
+     - location: reinstall_npm
+  ApplicationStart:
+     - location: restart_bu_cal
