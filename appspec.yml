@@ -18,8 +18,11 @@ files:
 
 hooks:
   ApplicationStop:
-     - location: scripts/stop_bu_cal
+    - location: scripts/stop_bu_cal
+      runas: root
   AfterInstall:
-     - location: scripts/reinstall_npm
+    - location: scripts/reinstall_npm
+    runas: root
   ApplicationStart:
-     - location: scripts/restart_bu_cal
+    - location: scripts/restart_bu_cal
+    runas: root
