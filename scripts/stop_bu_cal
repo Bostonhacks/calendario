@@ -1,1 +1,1 @@
-pm2 stop bin/www
+sudo pm2 stop bin/www
