@@ -1,4 +1,4 @@
-//Authentication
+// Authentication
 var authenticate = require('./authenticate.js');
 var oauth2Client = authenticate.client;
 var calendarAPI = authenticate.api.calendar('v3');
@@ -16,7 +16,6 @@ var fieldsNeeded = 'items(description,id,summary, start, end)';
 var singleEventsBool = true;
 var orderByStart = 'startTime';
 
-//async
 var async = require('async');
 
 function cleanUp(req, res)

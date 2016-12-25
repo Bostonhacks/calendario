@@ -1,4 +1,12 @@
-//Returns parsed array
+const MON_START = '20170123';
+const TUE_START = '20170124';
+const WED_START = '20170125';
+const THU_START = '20170119';
+const FRI_START = '20170120';
+const TIMEZONE = '-05:00';
+
+// Returns parsed array
+// @jknollmeyer
 function createClassArray(req)
 {
   var classArray = [];
@@ -21,8 +29,6 @@ function createClassArray(req)
 
   classArray.splice(0,1);
 
-  //Debug
-  //console.log(classArray);
   return classArray;
 }
 
@@ -35,7 +41,7 @@ function setDateTimeFormat(time, date) {
 
   date = date.substring(0,4) + "-" + date.substring(4,6) + "-" + date.substring(6);
   time = time.substring(0,2) + ":" + time.substring(2);
-  time = time + ":00.000-04:00";
+  time = time + ":00.000" + TIMEZONE;
 
   var dateTime = date + 'T' + time;
 
@@ -43,20 +49,18 @@ function setDateTimeFormat(time, date) {
   return dateTime;
 }
 
-//Get weekday for start of classes
-//Updated for spring
 function getWeekDay(string){
     switch(string) {
       case 'Mon':
-          return '20160912';
+          return MON_START;
       case 'Tue':
-          return '20160906';
+          return TUE_START;
       case 'Wed':
-          return '20160907';
+          return WED_START;
       case 'Thu':
-          return '20160908';
+          return THU_START;
       case 'Fri':
-          return '20160909';
+          return FRI_START;
       default:
           console.log('weekday recognition error');
           return null;

@@ -9,6 +9,8 @@ var calendarAPI = authenticate.api.calendar('v3');
 //Parser
 var parser = require('./parse.js');
 
+const UNTIL_DATE = '20170503T120000Z';
+
 function insertCalendar(req, res)
 {
   calendarAPI.calendars.insert({
@@ -60,7 +62,7 @@ var insertClass = function (calendarCreated, arrayIndex, callback)
       "timeZone": "America/New_York"
     },
     "recurrence": [
-      "RRULE:FREQ=WEEKLY;UNTIL=20161212T120000Z",//BU-SPECIFIC
+      "RRULE:FREQ=WEEKLY;UNTIL=" + UNTIL_DATE,//BU-SPECIFIC
     ]
   };
 
