@@ -1,2 +1,7 @@
 # bu_google_calendar
-# Takes bu calendar schedule and converts it to google calendar
+### Takes bu calendar schedule and converts it to google calendar
+
+This:
+    http://www.bu.edu/uiszl_j2ee/ScheduleImage/ScheduleImageServlet?c1=CAS+WR150+P3&d1=Tue&tb1=1700&te1=1815&db1=20170119&de1=20170502&c2=CAS+WR150+P3&d2=Thu&tb2=1700&te2=1815&db2=20170119&de2=20170502&c3=ENG+EC401+A1&d3=Mon&tb3=1220&te3=1405&db3=20170123&de3=20170503&c4=ENG+EC401+A1&d4=Wed&tb4=1220&te4=1405&db4=20170123&de4=20170503&c5=ENG+EC401+B1&d5=Tue&tb5=1830&te5=2015&db5=20170124&de5=20170502&c6=ENG+EC413+A1&d6=Mon&tb6=1010&te6=1155&db6=20170123&de6=20170503&c7=ENG+EC413+A1&d7=Wed&tb7=1010&te7=1155&db7=20170123&de7=20170503&c8=ENG+EC413+B3&d8=Mon&tb8=1640&te8=1730&db8=20170123&de8=20170501&c9=ENG+EC500+C1&d9=Mon&tb9=1630&te9=1815&db9=20170123&de9=20170503&c10=ENG+EC500+C1&d10=Wed&tb10=1630&te10=1815&db10=20170123&de10=20170503&c11=ENG+EC541+A1&d11=Tue&tb11=1330&te11=1515&db11=20170119&de11=20170502&c12=ENG+EC541+A1&d12=Thu&tb12=1330&te12=1515&db12=20170119&de12=20170502&e=8517351674&height=412&width=631&LastActivityTime=1482648326
+
+Becomes a google calendar!
