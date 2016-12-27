@@ -56,7 +56,7 @@ var insertClass = function (calendarCreated, arrayIndex, callback) {
       'timeZone': 'America/New_York'
     },
     'recurrence': [
-      'RRULE:FREQ=WEEKLYUNTIL=' + UNTIL_DATE
+      'RRULE:FREQ=WEEKLY;UNTIL=' + UNTIL_DATE
     ]
   }
 
@@ -66,7 +66,7 @@ var insertClass = function (calendarCreated, arrayIndex, callback) {
     resource: event
   }, function (err, event) {
     if (err) {
-      debug('Error on insert')
+      debug('Error on insert' + err)
       return callback(err)
     } else {
       return callback()

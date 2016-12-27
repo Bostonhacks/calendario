@@ -148,7 +148,7 @@ function DELETE_SPR_BREAK (callback) {
   }, function (err, eventList) {
     if (err) {
       debug('Error getting spr_break ' + err)
-      callback(err)
+      return callback(err)
     } else {
       var items = eventList.items
       for (var i = 0, len = items.length; i < len; i++) {
