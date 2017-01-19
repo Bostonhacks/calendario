@@ -21,8 +21,8 @@ const orderByStart = 'startTime'
 
 var async = require('async')
 
-function cleanUp (req, res) {
-  setCalId(req.query.cid,
+function cleanUp (cid, callback) {
+  setCalId(cid,
     function () {
       async.waterfall([
         DELETE_FEB_21,
@@ -31,8 +31,13 @@ function cleanUp (req, res) {
         DELETE_APR_19,
         MOVE_APR_17_TO_19
       ], function (err, result) {
-        debug(result)
-        res.redirect('/end')
+        if (err) {
+          debug(err)
+          return callback(err)
+        } else {
+          debug(result)
+          return callback()
+        }
       })
     }
   )
@@ -62,10 +67,10 @@ function MOVE_FEB_20_TO_21 (callback) {
       for (var i = 0, len = items.length; i < len; i++) {
         var startPrefix = '2017-02-21'
         var endPrefix = '2017-02-21'
-        if (items[i].start.dateTime.substring(11,13) == '00' || items[i].start.dateTime.substring(11,13) == '01' || items[i].start.dateTime.substring(11,13) == '02') {
+        if (items[i].start.dateTime.substring(11,13) == '00' || items[i].start.dateTime.substring(11, 13) == '01' || items[i].start.dateTime.substring(11, 13) == '02') {
           startPrefix = '2017-02-22'
         }
-        if (items[i].end.dateTime.substring(11,13) == '00' || items[i].end.dateTime.substring(11,13) == '01' || items[i].end.dateTime.substring(11,13) == '02') {
+        if (items[i].end.dateTime.substring(11,13) == '00' || items[i].end.dateTime.substring(11, 13) == '01' || items[i].end.dateTime.substring(11, 13) == '02') {
           endPrefix = '2017-02-22'
         }
 
@@ -73,16 +78,14 @@ function MOVE_FEB_20_TO_21 (callback) {
         var newEndDateTime = endPrefix + items[i].end.dateTime.substring(10)
 
         var newDateTime = {
-          'end':
-            {
-              'dateTime': newEndDateTime,
-              'timeZone': 'America/New_York'
-            },
-          'start':
-            {
-              'dateTime': newStartDateTime,
-              'timeZone': 'America/New_York'
-            },
+          'end': {
+            'dateTime': newEndDateTime,
+            'timeZone': 'America/New_York'
+          },
+          'start': {
+            'dateTime': newStartDateTime,
+            'timeZone': 'America/New_York'
+          },
           'summary': items[i].summary
         }
         calendarAPI.events.update({
@@ -116,6 +119,7 @@ function DELETE_FEB_21 (callback) {
       debug(err)
       return callback(err)
     } else {
+      debug(eventList)
       var items = eventList.items
       for (var i = 0, len = items.length; i < len; i++) {
         calendarAPI.events.delete({

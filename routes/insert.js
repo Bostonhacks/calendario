@@ -35,7 +35,7 @@ function insertClasses (calendarCreated, query, callback) {
         return callback(err)
       } else {
         debug('Completed class insertion!')
-        return callback()
+        return callback(null, calendarCreated.id)
       }
     })
 }

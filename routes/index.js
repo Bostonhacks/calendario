@@ -3,6 +3,7 @@ var router = express.Router()
 var authenticate = require('./authenticate.js')
 var insert = require('./insert.js')
 var clean = require('./clean.js')
+var debug = require('debug')('index')
 
 router.get('/', function (req, res, next) {
   return res.render('index', { title: 'BU Schedule to Google Calendar Import', subtitle: 'Use this tool to create a google calendar from your BU class schedule.' })
@@ -17,17 +18,20 @@ router.get('/new_bu_calendar/', function (req, res, next) {
 })
 
 router.get('/classes/', function (req, res, next) {
-  insert.insertCalendar(req.query.name, req.query, function (err) {
+  insert.insertCalendar(req.query.name, req.query, function (err, calId) {
     if (err) {
       return res.redirect('/error')
     } else {
-      
+      debug('Inserted complete. Cleaning cal')
+      clean.cleanUp(calId, function (err) {
+        if (err) {
+          return res.redirect('/error')
+        } else {
+          return res.redirect('/end')
+        }
+      })
     }
   })
-})
-
-router.get('/clean', function (req, res, next) {
-  return clean.cleanUp(req, res)
 })
 
 router.get('/google/auth/', function (req, res) {
@@ -39,11 +43,11 @@ router.get('/google/authcomplete/', function (req, res) {
 })
 
 router.get('/instructions', function (req, res) {
-  res.render('instructions')
+  return res.render('instructions')
 })
 
 router.get('/end', function (req, res, next) {
-  res.render('end')
+  return res.render('end')
 })
 
 module.exports = router
