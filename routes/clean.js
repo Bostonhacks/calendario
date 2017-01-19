@@ -1,9 +1,7 @@
-// Authentication
 var authenticate = require('./authenticate.js')
 var oauth2Client = authenticate.client
 var calendarAPI = authenticate.api.calendar('v3')
 var newCalendarId = null
-
 var debug = require('debug')('clean')
 
 const FEB_20_START = '2017-02-20T00:00:00-05:00'

@@ -1,6 +1,5 @@
 var async = require('async')
 var debug = require('debug')('insert')
-// Authentication
 var authenticate = require('./authenticate.js')
 var oauth2Client = authenticate.client
 var calendarAPI = authenticate.api.calendar('v3')
@@ -9,33 +8,34 @@ var parser = require('./parse.js')
 
 const UNTIL_DATE = '20170503T120000Z'
 
-function insertCalendar (req, res) {
+function insertCalendar (calendarName, query, callback) {
   calendarAPI.calendars.insert({
     auth: oauth2Client,
     'resource': {
-      'summary': req.query.name
+      'summary': calendarName
     }
   }, function (err, calendarCreated) {
     if (err) {
       debug('CREATE CALENDAR ERROR ' + err)
-      return res.redirect('/error')
+      return callback(err)
+    } else {
+      debug('New calendar created - ')
+      debug('calendarId:' + calendarCreated.id)
+      return insertClasses(calendarCreated, query, callback)
     }
-    debug('New calendar created - ')
-    debug('calendarId:' + calendarCreated.id)
-    insertClasses(req, res, calendarCreated)
   })
 }
 
-function insertClasses (req, res, calendarCreated) {
-  var classArray = parser.createClassArray(req)
+function insertClasses (calendarCreated, query, callback) {
+  var classArray = parser.createClassArray(query)
   async.forEach(classArray, insertClass.bind(insertClass, calendarCreated),
     function (err) {
       if (err) {
         debug('Error on class insertion ' + err)
-        return res.redirect('/error')
+        return callback(err)
       } else {
         debug('Completed class insertion!')
-        return res.redirect('/clean?cid=' + calendarCreated.id)
+        return callback()
       }
     })
 }

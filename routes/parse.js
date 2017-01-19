@@ -9,14 +9,14 @@ const TIMEZONE = '-05:00'
 
 // Returns parsed array
 // @jknollmeyer
-function createClassArray (req) {
+function createClassArray (query) {
   var classArray = []
   // Iterate through every property in the query
-  for (var property in req.query) {
+  for (var property in query) {
     // Once we reach the 'e' property, there are no more class properties
-    if (property == 'e')
+    if (property === 'e') {
       break
-    else {
+    } else {
       // replacing the letters will tell us which class this is
       var index = property.replace(/[a-z]/g, '')
       // replacing the numbers will give us the property type
@@ -25,12 +25,11 @@ function createClassArray (req) {
         classArray[index] = {}
       }
       // Set the properties of our class array from the query's data
-      classArray[index][type] = req.query[property]
+      classArray[index][type] = query[property]
     }
   }
 
   classArray.splice(0, 1)
-
   return classArray
 }
 
@@ -41,14 +40,11 @@ function setDateTimeFormat (time, date) {
     return
   }
 
-  date = date.substring(0,4) + '-' + date.substring(4,6) + '-' + date.substring(6)
-  time = time.substring(0,2) + ':' + time.substring(2)
+  date = date.substring(0, 4) + '-' + date.substring(4, 6) + '-' + date.substring(6)
+  time = time.substring(0, 2) + ':' + time.substring(2)
   time = time + ':00.000' + TIMEZONE
 
-  var dateTime = date + 'T' + time
-
-  debug(dateTime)
-  return dateTime
+  return date + 'T' + time
 }
 
 function getWeekDay (string) {
