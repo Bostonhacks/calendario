@@ -4,9 +4,9 @@ var OAuth2 = google.auth.OAuth2
 
 //Credentials
 var client_secret = require('../client_secret.json')
-var CLIENT_ID = client_secret.web.client_id
-var CLIENT_SECRET = client_secret.web.client_secret
-var REDIRECT_URL = client_secret.web.redirect_uris[0]
+var CLIENT_ID = client_secret.installed.client_id
+var CLIENT_SECRET = client_secret.installed.client_secret
+var REDIRECT_URL =  "http://localhost:3000/oauth/callback"//client_secret.installed.redirect_uri[0]
 var oauth2Client = new OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL)
 
 // generate a url that asks permissions for Google+ and Google Calendar scopes
