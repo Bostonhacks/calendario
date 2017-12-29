@@ -19,11 +19,12 @@ html
       }
   body
     block content
-      h1(class="title")= title
-      h2(class="title")= instruction
+      h1(class="title") Enter schedule URL below
+      h2(class="title") Go to the StudentLink and click Current Schedule. Sign in. RIGHT CLICK ON THE GRAPH and select "Copy Image URL". Paste Below.
       a(href='/instructions') Detailed Instructions
       input(type='text' name='schedule' class='input_schedule')
-      h2(class="title")= name
+      h2(class="title") Enter the name of your calendar here:
       input(type='text' name='name' class='input_name')
       button(onclick="createCalendar()" class="start").
         Go
+s
