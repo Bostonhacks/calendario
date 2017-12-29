@@ -1,20 +1,16 @@
-var express = require('express')
-var router = express.Router()
-var authenticate = require('./authenticate.js')
-var insert = require('./insert.js')
-var clean = require('./clean.js')
-var debug = require('debug')('index')
+const express = require('express')
+const router = express.Router()
+const authenticate = require('../lib/authenticate.js')
+const insert = require('../lib/insert.js')
+const clean = require('../lib/clean.js')
+const debug = require('debug')('routes:index')
 
 router.get('/', function (req, res, next) {
-  return res.render('index', { title: 'BU Schedule to Google Calendar Import', subtitle: 'Use this tool to create a google calendar from your BU class schedule.' })
+  res.render('index')
 })
 
 router.get('/new_bu_calendar/', function (req, res, next) {
-  return res.render('new_bu_calendar', {
-    title: 'Enter schedule URL below',
-    instruction: 'Go to the StudentLink and click Current Schedule. Sign in. RIGHT CLICK ON THE GRAPH and select "Copy Image URL". Paste Below.',
-    name: 'Enter the name of your calendar here: '
-  })
+  res.render('new_bu_calendar')
 })
 
 router.get('/classes/', function (req, res, next) {
