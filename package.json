@@ -3,18 +3,38 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "start-dev": "./node_modules/nodemon/bin/nodemon.js ./bin/www localhost 3000",
+    "lint" : "./node_modules/standard/bin/cmd.js"
   },
   "dependencies": {
     "async": "^1.4.2",
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
+    "dotenv": "^4.0.0",
     "express": "~4.13.1",
     "googleapis": "^2.1.3",
     "htmlparser": "^1.7.7",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "mocha": "^4.1.0",
+    "nodemon": "^1.14.6",
+    "standard": "^10.0.3"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      ".git",
+      "node_modules/**/node_modules"
+    ],
+    "verbose": true,
+    "events": {
+      "restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
+    },
+    "ext": "js json"
   }
 }

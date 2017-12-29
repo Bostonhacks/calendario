@@ -67,10 +67,10 @@ function MOVE_FEB_20_TO_21 (callback) {
       for (var i = 0, len = items.length; i < len; i++) {
         var startPrefix = '2017-02-21'
         var endPrefix = '2017-02-21'
-        if (items[i].start.dateTime.substring(11,13) == '00' || items[i].start.dateTime.substring(11, 13) == '01' || items[i].start.dateTime.substring(11, 13) == '02') {
+        if (items[i].start.dateTime.substring(11, 13) === '00' || items[i].start.dateTime.substring(11, 13) === '01' || items[i].start.dateTime.substring(11, 13) === '02') {
           startPrefix = '2017-02-22'
         }
-        if (items[i].end.dateTime.substring(11,13) == '00' || items[i].end.dateTime.substring(11, 13) == '01' || items[i].end.dateTime.substring(11, 13) == '02') {
+        if (items[i].end.dateTime.substring(11, 13) === '00' || items[i].end.dateTime.substring(11, 13) === '01' || items[i].end.dateTime.substring(11, 13) === '02') {
           endPrefix = '2017-02-22'
         }
 
@@ -190,10 +190,10 @@ function MOVE_APR_17_TO_19 (callback) {
       for (var i = 0, len = items.length; i < len; i++) {
         var startPrefix = '2017-04-19'
         var endPrefix = '2017-04-19'
-        if (items[i].start.dateTime.substring(11,13) == '00' || items[i].start.dateTime.substring(11,13) == '01' || items[i].start.dateTime.substring(11,13) == '02') {
+        if (items[i].start.dateTime.substring(11, 13) === '00' || items[i].start.dateTime.substring(11, 13) === '01' || items[i].start.dateTime.substring(11, 13) === '02') {
           startPrefix = '2017-04-20'
         }
-        if (items[i].end.dateTime.substring(11,13) == '00' || items[i].end.dateTime.substring(11,13) == '01' || items[i].end.dateTime.substring(11,13) == '02') {
+        if (items[i].end.dateTime.substring(11, 13) === '00' || items[i].end.dateTime.substring(11, 13) === '01' || items[i].end.dateTime.substring(11, 13) === '02') {
           endPrefix = '2017-04-20'
         }
 
@@ -261,40 +261,6 @@ function DELETE_APR_19 (callback) {
     }
   })
 }
-
-//date:'2016-02-16T23:00:00-05:00'
-// function getDay(dateString, callback)
-// {
-//   calendar.events.list({
-//     auth: oauth2Client,
-//     calendarId: newCalendarID,
-//     orderBy: 'startTime',
-//     singleEvents: true,
-//     timeMax: getTimeMax(dateString),
-//     timeMin: getTimeMin(dateString),
-//     fields: 'items(description,id,summary, start, end)'
-//   }, function(err, eventList) {
-//     if (err) {
-//       debug(err)
-//       return callback(err)
-//     }
-//     return callback(eventList)
-//   })
-// }
-//
-// function updateDay(newDateString, callback)
-// {
-//   calendar.events.update({
-//     auth: oauth2Client,
-//     calendarId: newCalendarID,
-//     eventId: items[i].id,
-//     resource: newDateTime
-//   }, function(err){
-//     if (err) {
-//       callback(err)
-//     }
-//   })
-// }
 
 module.exports = {
   cleanUp: cleanUp

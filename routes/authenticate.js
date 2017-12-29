@@ -1,23 +1,19 @@
-//Google API authentication
-var google = require('googleapis')
-var OAuth2 = google.auth.OAuth2
+const google = require('googleapis')
+const OAuth2 = google.auth.OAuth2
 
-//Credentials
-var client_secret = require('../client_secret.json')
-var CLIENT_ID = client_secret.web.client_id
-var CLIENT_SECRET = client_secret.web.client_secret
-var REDIRECT_URL = client_secret.web.redirect_uris[0]
-var oauth2Client = new OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL)
+// Credentials
+const CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
+const REDIRECT_URL = process.env.REDIRECT_URL
+const oauth2Client = new OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL)
 
-// generate a url that asks permissions for Google+ and Google Calendar scopes
-var scopes = [
+const scopes = [
   'https://www.googleapis.com/auth/calendar'
 ]
 
-// Redirects to authentication page via google
 function getAccessToken (res) {
-  var url = oauth2Client.generateAuthUrl({
-    access_type: 'offline', // will return a refresh token
+  const url = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
     scope: scopes
   })
 
