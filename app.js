@@ -15,7 +15,7 @@ const logDir = path.join(__dirname, 'log')
 fs.existsSync(logDir) || fs.mkdirSync(logDir)
 
 const accessLogStream = rfs('access.log', {
-  interval: '14d',
+  interval: '7d',
   path: logDir
 })
 

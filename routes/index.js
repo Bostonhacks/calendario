@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var authenticate = require('./authenticate.js')
+var authenticate = require('../lib/authenticate.js')
 var insert = require('./insert.js')
 var clean = require('./clean.js')
 var debug = require('debug')('index')

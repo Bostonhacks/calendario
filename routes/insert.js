@@ -1,6 +1,6 @@
 var async = require('async')
 var debug = require('debug')('insert')
-var authenticate = require('./authenticate.js')
+var authenticate = require('../lib/authenticate.js')
 var oauth2Client = authenticate.client
 var calendarAPI = authenticate.api.calendar('v3')
 
