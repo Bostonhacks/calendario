@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const authenticate = require('../lib/authenticate.js')
-const insert = require('../lib/insert.js')
-const clean = require('../lib/clean.js')
+const authenticate = require('../lib/authenticate')
+const calendar = require('../lib/calendar')
 const debug = require('debug')('routes:index')
 
 router.get('/', function (req, res, next) {
@@ -14,20 +13,16 @@ router.get('/new_bu_calendar/', function (req, res, next) {
 })
 
 router.get('/classes/', function (req, res, next) {
-  insert.insertCalendar(req.query.name, req.query, function (err, calId) {
-    if (err) {
-      return res.redirect('/error')
-    } else {
-      debug('Inserted complete. Cleaning cal')
-      clean.cleanUp(calId, function (err) {
-        if (err) {
-          return res.redirect('/error')
-        } else {
-          return res.redirect('/end')
-        }
-      })
-    }
-  })
+  debug('query: ' + JSON.stringify(req.query))
+  calendar
+    .insert(req.query)
+    .then(msg => {
+
+    })
+    .catch(err => {
+      debug(err)
+      // TODO: handle err
+    })
 })
 
 router.get('/google/auth/', function (req, res) {
