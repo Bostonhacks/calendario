@@ -13,7 +13,6 @@ router.get('/new_bu_calendar/', function (req, res, next) {
 })
 
 router.get('/classes/', function (req, res, next) {
-  debug('query: ' + JSON.stringify(req.query))
   calendar
     .insert(req.query)
     .then(msg => {
