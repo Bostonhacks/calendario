@@ -15,8 +15,9 @@ router.get('/new_bu_calendar/', function (req, res, next) {
 router.get('/classes/', function (req, res, next) {
   calendar
     .insert(req.query)
-    .then(msg => {
-
+    .then(() => {
+      // Done! redirect to end
+      res.redirect('/end')
     })
     .catch(err => {
       debug(err)
