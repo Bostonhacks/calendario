@@ -1,0 +1,67 @@
+{
+  "google": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectURL": ""
+  },
+  "classes": {
+    "startDate": {
+      "monday": "01-22-2018",
+      "tuesday": "01-23-2018",
+      "wednesday": "01-24-2018",
+      "thursday": "01-18-2018",
+      "friday": "01-19-2018"
+    },
+    "endDate": "05-02-2018",
+    "holidays": [
+      {
+        "description": "Substitute Monday Schedule of Classes", 
+        "startDate": "02-20-2018",
+        "endDate": "02-20-2018",
+        "action": "DELETE"
+      },
+      {
+        "description": "Presidents’ Day Holiday, Classes Suspended", 
+        "startDate": "02-19-2018",
+        "endDate": "02-19-2018",
+        "action": "MOVE",
+        "targetStartDate": "02-20-2018",
+        "targetEndDate": "02-20-2018"
+      },
+      {
+        "description": "Spring Break", 
+        "startDate": "03-03-2018",
+        "endDate": "03-11-2018",
+        "action": "DELETE"
+      },
+      {
+        "description": "Substitute Monday Schedule of Classes", 
+        "startDate": "04-18-2018",
+        "endDate": "04-18-2018",
+        "action": "DELETE"
+      },
+      {
+        "description": "Patriots’ Day Holiday, Classes Suspended", 
+        "startDate": "04-16-2018",
+        "endDate": "04-16-2018",
+        "action": "MOVE",
+        "targetStartDate": "04-18-2018",
+        "targetEndDate": "04-18-2018"
+      }
+    ],
+    "specialDays": [
+      {
+        "description": "Study Period", 
+        "startDate": "05-03-2018",
+        "endDate": "05-06-2018",
+        "action": "CREATE"
+      },
+      {
+        "description": "Final Exams", 
+        "startDate": "05-07-2018",
+        "endDate": "05-11-2018",
+        "action": "CREATE"
+      }
+    ]
+  }
+}
