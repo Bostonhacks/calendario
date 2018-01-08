@@ -1,0 +1,31 @@
+jobs:
+  build:
+    working_directory: ~/calendario
+    docker:
+      - image: circleci/node:7
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - deploy:
+          name: deploy-bostonhacks-calendario-prod
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              scp -o StrictHostKeyChecking=no -r ~/calendario/bin circleci@${BOSTONHACKS_IP_ADDR}:/var/www/calendario/
+              scp -o StrictHostKeyChecking=no -r ~/calendario/config circleci@${BOSTONHACKS_IP_ADDR}:/var/www/calendario/
+              scp -o StrictHostKeyChecking=no -r ~/calendario/lib circleci@${BOSTONHACKS_IP_ADDR}:/var/www/calendario/
+              scp -o StrictHostKeyChecking=no -r ~/calendario/public circleci@${BOSTONHACKS_IP_ADDR}:/var/www/calendario/
+              scp -o StrictHostKeyChecking=no -r ~/calendario/routes circleci@${BOSTONHACKS_IP_ADDR}:/var/www/calendario/
+              scp -o StrictHostKeyChecking=no -r ~/calendario/views circleci@${BOSTONHACKS_IP_ADDR}:/var/www/calendario/
+              scp -o StrictHostKeyChecking=no -r ~/calendario/app.js circleci@${BOSTONHACKS_IP_ADDR}:/var/www/calendario/
+              scp -o StrictHostKeyChecking=no -r ~/calendario/package-lock.json circleci@${BOSTONHACKS_IP_ADDR}:/var/www/calendario/
+              scp -o StrictHostKeyChecking=no -r ~/calendario/package.json circleci@${BOSTONHACKS_IP_ADDR}:/var/www/calendario/
+              cat ~/calendario/scripts/restart.sh | ssh -o StrictHostKeyChecking=no -tt circleci@${BOSTONHACKS_IP_ADDR}
+            fi
