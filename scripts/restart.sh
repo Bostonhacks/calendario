@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /var/www/headstart
+cd /var/www/calendario
 npm install
-pm2 restart bostonhacks
+pm2 restart calendario
 logout
