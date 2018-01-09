@@ -5,6 +5,7 @@
  */
 
 const app = require('../app')
+const configPort = require('config').get('port')
 const debug = require('debug')('bu_calendar:server')
 const http = require('http')
 
@@ -12,7 +13,7 @@ const http = require('http')
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000')
+const port = normalizePort(configPort || '3005')
 app.set('port', port)
 
 /**
