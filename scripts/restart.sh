@@ -1,5 +1,5 @@
 #!/bin/bash
 cd /var/www/calendario
-npm install
+npm install --production
 pm2 restart calendario
-logout
+exit

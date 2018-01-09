@@ -22,7 +22,6 @@ const accessLogStream = rfs('access.log', {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
-app.set('port', process.env.PORT || 3000)
 
 if (process.env.ENV === 'DEV') {
   app.use(morgan('dev'))
