@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start-dev": "./node_modules/nodemon/bin/nodemon.js ./bin/www localhost 3000",
+    "start-dev": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www localhost 3000",
     "lint": "./node_modules/standard/bin/cmd.js",
     "test": "./node_modules/mocha/bin/mocha test/"
   },
